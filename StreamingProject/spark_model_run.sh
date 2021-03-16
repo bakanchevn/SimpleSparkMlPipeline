@@ -1,0 +1,1 @@
+/spark/bin/spark-submit --class="github.bakanchevn.MLModelGeneration" --name="MlModel" --master="local[*]" /app/target/scala-2.12/SparkML-assembly-1.0.jar
