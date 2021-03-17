@@ -75,7 +75,7 @@ If you want to run each row with some latency it can be done by
 awk -F ',' 'NR>1 {print}' < BankChurners.csv | xargs -I % sh  -c '{ echo %; sleep 1; }' |  kafka-console-producer --topic client_in --bootstrap-server localhost:9092
 ```
 
-If there is no xargs in docker, you can use [bash script](SimpleSparkMlPipeline/KafkaFiles/kafka_produce_with_latency_no_xargs.sh)
+If there is no xargs in docker, you can use [bash script](KafkaFiles/kafka_produce_with_latency_no_xargs.sh)
 
 
 
