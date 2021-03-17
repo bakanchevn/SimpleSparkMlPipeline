@@ -4,7 +4,7 @@
 
 # About the project 
 
-Project uses [credut card customers](https://www.kaggle.com/sakshigoyal7/credit-card-customers) data to predict churning customers. 
+Project uses [credit card customers](https://www.kaggle.com/sakshigoyal7/credit-card-customers) data to predict churning customers. 
 It makes SparkML model, and then Using it's model inside Spark Streaming Application which reading data from one Kafka topic and produce the result to another.
 
 
