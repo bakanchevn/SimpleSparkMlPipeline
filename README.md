@@ -58,6 +58,7 @@ It starts application which use stream which reads topic client_in from kafkas, 
 
 # Kafka 
 
+All comands mentioned below can be found in [the folder](KafkaFiles/)
 
 ## Produce
 To emulate customer clients flow input you can use one of these commands: 
