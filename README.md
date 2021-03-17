@@ -3,8 +3,8 @@
 
 
 # About the project 
-F
-Project uses [https://www.kaggle.com/sakshigoyal7/credit-card-customers](credit card customers) data to predict churning customers. 
+
+Project uses [credut card customers](https://www.kaggle.com/sakshigoyal7/credit-card-customers) data to predict churning customers. 
 It makes SparkML model, and then Using it's model inside Spark Streaming Application which reading data from one Kafka topic and produce the result to another.
 
 
@@ -20,6 +20,12 @@ For starting all images use
 ```bash
 docker-compose up
 ```
+
+
+
+## Prerequisite 
+
+JAR should be assembled in [StreamingProject](StreamingProject/build.sbt)
 
 # Spark-worker-1
 
@@ -46,13 +52,15 @@ To start a streaming pipeline which gives the result of incoming client informat
 sh spark_stream_run.sh
 ```
 
+It starts application which use stream which reads topic client_in from kafkas, provides model evaulation for rows, and produces result to topic client_out.
+
 
 
 # Kafka 
 
 
 ## Produce
-To emulate customer producing you can use on of this command: 
+To emulate customer clients flow input you can use one of these commands: 
 
 Just some batch portion of clients:
 
@@ -61,9 +69,17 @@ cat BankChurners.csv | awk '{if(NR>1 && NR<200)print}' |  kafka-console-producer
 ```
 
 
+If you want to run each row with some latency it can be done by 
+
+```bash 
+awk -F ',' 'NR>1 {print}' < BankChurners.csv | xargs -I % sh  -c '{ echo %; sleep 1; }' |  kafka-console-producer --topic client_in --bootstrap-server localhost:9092
+```
+
+If there is no xargs in docker, you can use [bash script](SimpleSparkMlPipeline/KafkaFiles/kafka_produce_with_latency_no_xargs.sh)
 
 
-You can start two or more producers to view what's happening if there are several channels. 
+
+You can start two or more kafka-console-producers via provided scripts to view what's happening if there are several channels. 
 
 ## Consume 
 To see results of model evaluation you can use kafka-console-consumer
